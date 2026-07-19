@@ -46,7 +46,7 @@ causal attention mask 只限制模型不能看未来；它不保证动作干预�
 
 ## 关联笔记
 
-- [反事实动作评估设计](../research/action-controllability/evaluation-design.md)
+- [反事实动作评估设计](../research/action-controllability-evaluation.md)
 - [Latent action](latent-action.md)
 - [Action conditioning](action-conditioning.md)
-- [LingBot 系列比较](../comparisons/lingbot-series.md)
+- [LingBot 系列比较](../series/lingbot-series.md)

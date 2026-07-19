@@ -1,5 +1,5 @@
 ---
-type: comparison
+type: series
 title: "Dreamer V1/V2/V3：从 latent imagination 到统一跨域训练"
 papers: [dreamer-v1, dreamer-v2, dreamer-v3]
 status: stable

@@ -3,49 +3,71 @@
 ## 新增一篇论文
 
 1. 从 `templates/paper-note.md` 复制模板。
-2. 将文件放入 `papers/<category>/<series>/<paper-slug>.md`；路径只使用小写英文、数字和连字符。
-3. 填写完整 YAML；未知字段使用 `null`，不要猜测。
-4. 从 `config/taxonomy.yml` 选择 category、status、confidence 和三层标签。
-5. 图片放入 `assets/papers/<paper-slug>/`，使用描述内容的文件名。
-6. 写完后更新至少一个 topic、comparison 或 research 链接。
-7. 运行生成、校验和测试命令。
+2. 将文件放入 `papers/<category>/<paper-slug>.md`；系列较多时可以增加一级系列目录，例如 `papers/model-based-rl/dreamer/`。
+3. 填写 YAML；未知日期或链接使用 `null`，不要猜测。
+4. 从 `config/taxonomy.yml` 选择稳定的 `category`、`status`、`confidence` 和 tags。
+5. 图片放入 `assets/papers/<paper-slug>/`，使用能说明内容的英文文件名。
+6. 保证单篇笔记能够独立读懂。只有存在真正的跨论文长期主题时，才新增或更新 `topics/`、`series/`。
+7. 生成索引并运行完整校验。
 
-## 内容边界
+## 内容组织原则
 
-单篇论文笔记回答“作者做了什么”，专题回答“这个知识点如何跨论文演化”，比较文档回答“方法之间为什么不同”，研究文档保存可证伪的问题和实验设计。
+- `papers/` 保存完整论文阅读，包含方法、公式、实验、局限和个人判断。
+- `series/` 比较同一系列或明确相关的方法演化。
+- `topics/` 汇总跨多篇论文反复出现的概念，允许与单篇笔记存在必要重叠。
+- `research/` 集中保存想法和已具体化的研究设计，不再拆分为 questions、protocols、proposals。
+- `implementations/` 保存代码阅读和复现边界；是否运行成功在对应实现文档中说明。
 
-论文笔记必须明确包含：
+飞书、Notion、ChatGPT 和本地 Markdown 只是来源，不是分类。原始链接写入对应文档的 `source_urls`，不要新建来源目录或来源映射表。
 
-- `论文明确内容`：方法、公式、实验、作者声明的结果与局限；
+## 论文 YAML
+
+```yaml
+---
+type: paper
+title: ""
+short_name: ""
+authors: []
+year: null
+venue: null
+
+paper_url: ""
+code_url: null
+project_url: null
+source_urls: []
+
+category: ""
+series: null
+tags: []
+
+status: reading
+confidence: low
+read_date: null
+updated: null
+
+main_idea: ""
+---
+```
+
+论文状态仅使用 `todo / reading / skimmed / finished / revisit / implemented`。跨领域关系使用扁平 tags 表达；新增标签前先确认现有词表无法覆盖，再修改 `config/taxonomy.yml`。
+
+## 正文与证据边界
+
+不为统一格式重写已有分析。新增笔记建议明确区分：
+
+- `论文明确内容`：作者报告的方法、公式、实验、结果与局限；
 - `我的理解`：对贡献、取舍和适用范围的解释；
-- `推测与问题`：未被论文证明、需要核验或实验验证的判断。
+- `推测与问题`：尚未被论文证明、需要核验或实验验证的判断。
 
 不要把 related work 的数字写成本论文结果，也不要把 causal attention 等同于因果机制。
-
-## YAML 约定
-
-论文必填字段由 `scripts/kb.py` 检查。`year` 表示论文首次公开年份；正式 venue 若跨年写在 `venue`。`read_date` 只在日期确定时填写。`main_idea` 必须是一句话，供索引使用。
-
-标签只分三层：
-
-- `task`：任务与应用域；
-- `method`：方法、架构或训练技术；
-- `problem`：论文处理的研究难点。
-
-新增标签前先确认现有词表无法表达，再修改 `config/taxonomy.yml`。
 
 ## 图片与附件
 
 - 使用 `overall-architecture.png`、`atari-results.png` 等语义化名称。
-- Markdown 必须提供可理解的 alt text。
-- 图片下说明来源论文及 Figure/Table 编号；无法确认编号时明确写“待核验”。
-- 裁剪、重绘或拼接图要注明修改方式。
-- 原始矢量文件放入该论文资产目录的 `source/`，并从正文或资产索引链接。
-- 不把第三方素材视为仓库原创授权的一部分。
-
-## 实现与复现记录
-
-实现文档必须记录外部仓库 URL、测试 commit、运行环境和复现边界。若历史记录缺少 commit，使用 `null` 并明确提示，不能伪造版本。
+- Markdown 提供可理解的 alt text，并尽量注明 Figure/Table 编号与来源。
+- 原始矢量文件可以放入该论文资产目录的 `source/`，但必须从 Markdown 链接。
+- 移动附件时核对二进制哈希，不修改或丢弃历史图片、PDF、SVG 和视频。
+- 第三方素材不属于仓库原创内容授权。
 
 ## 维护命令
 
@@ -56,4 +78,4 @@ python scripts/kb.py validate
 python -m unittest discover -s tests
 ```
 
-`PAPER_INDEX.md` 是生成文件，不手工编辑。外部 HTTP 链接不在 CI 中联网探测，以避免临时网络故障造成误报。
+`PAPER_INDEX.md` 是生成文件，不手工编辑。CI 不联网探测外部 URL，避免网络波动造成误报。

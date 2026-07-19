@@ -1,6 +1,8 @@
 ---
-type: comparison
+type: series
 title: "LingBot 系列：World、VA 与 Map 的三条演化路线"
+source_urls:
+  - "https://my.feishu.cn/wiki/OodjwrEoli5U2dkFXAOc6HNOnDr"
 papers:
   - lingbot-world-v1
   - lingbot-world-v2
@@ -17,9 +19,9 @@ updated: 2026-07-19
 
 五篇论文并非一条从 World 1.0 线性升级到 Map 的路线，而是三条互补分支：World 生成可交互视觉世界，VA 用未来视觉辅助机器人控制，Map 将视频流整理成稳定三维几何。
 
-![LingBot 五篇论文的关系](../assets/comparisons/lingbot-series/series-overview.png)
+![LingBot 五篇论文的关系](../assets/series/lingbot-series/series-overview.png)
 
-*实线表示论文已经展示的跨分支使用；虚线表示可能的未来结合。[SVG 版本](../assets/comparisons/lingbot-series/series-overview.svg)*
+*实线表示论文已经展示的跨分支使用；虚线表示可能的未来结合。[SVG 版本](../assets/series/lingbot-series/series-overview.svg)*
 
 ## 三条分支
 
@@ -86,9 +88,9 @@ World 更接近“历史世界 + 外部动作 → 后续视觉世界”。VA 的
 
 ## 单篇笔记
 
-- [LingBot-World 1.0](../papers/interactive-world-models/lingbot-world/lingbot-world-v1.md)
-- [LingBot-World 2.0](../papers/interactive-world-models/lingbot-world/lingbot-world-v2.md)
-- [LingBot-VA 1.0](../papers/embodied-world-models/lingbot-va/lingbot-va-v1.md)
-- [LingBot-VA 2.0](../papers/embodied-world-models/lingbot-va/lingbot-va-v2.md)
-- [LingBot-Map](../papers/embodied-world-models/lingbot-map/lingbot-map.md)
-- [反事实动作评估设计](../research/action-controllability/evaluation-design.md)
+- [LingBot-World 1.0](../papers/generative-world-models/lingbot-world-v1.md)
+- [LingBot-World 2.0](../papers/generative-world-models/lingbot-world-v2.md)
+- [LingBot-VA 1.0](../papers/embodied-world-models/lingbot-va-v1.md)
+- [LingBot-VA 2.0](../papers/embodied-world-models/lingbot-va-v2.md)
+- [LingBot-Map](../papers/spatial-world-models/lingbot-map.md)
+- [反事实动作评估设计](../research/action-controllability-evaluation.md)

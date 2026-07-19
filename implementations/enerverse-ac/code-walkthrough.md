@@ -1849,4 +1849,4 @@ ray：相机 origin + direction → c_concat
 
 - [EnerVerse-AC 仓库概览](overview.md)
 - [Action conditioning 专题](../../topics/action-conditioning.md)
-- [Action controllability 评估设计](../../research/action-controllability/evaluation-design.md)
+- [Action controllability 评估设计](../../research/action-controllability-evaluation.md)

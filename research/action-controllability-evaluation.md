@@ -69,7 +69,7 @@ updated: 2026-07-19
 
 ## 关联笔记
 
-- [Action controllability 专题](../../topics/action-controllability.md)
-- [Action conditioning 专题](../../topics/action-conditioning.md)
-- [LingBot 系列比较](../../comparisons/lingbot-series.md)
-- [EnerVerse-AC 实现概览](../../implementations/enerverse-ac/overview.md)
+- [Action controllability 专题](../topics/action-controllability.md)
+- [Action conditioning 专题](../topics/action-conditioning.md)
+- [LingBot 系列比较](../series/lingbot-series.md)
+- [EnerVerse-AC 实现概览](../implementations/enerverse-ac/overview.md)

@@ -1,6 +1,8 @@
 ---
 type: topic
 title: "时序信用分配：从时间邻近到回报分解"
+source_urls:
+  - "https://uniquestudio.feishu.cn/wiki/VGqdwD1fNi6zI3kqAXScrrAWnmb"
 source_papers: [temporal-credit-assignment-survey, coca]
 status: stable
 updated: 2026-07-19
@@ -72,7 +74,7 @@ $$
 
 ## 关联笔记
 
-- [时序信用分配综述](../papers/surveys-and-benchmarks/temporal-credit-assignment-survey.md)
+- [时序信用分配综述](../papers/surveys/temporal-credit-assignment-survey.md)
 - [强化学习基础](reinforcement-learning-foundations.md)
-- [CoCA](../papers/generative-model-rl/coca/step-level-reward-for-free.md)
-- [视频生成中的多层级信用分配](../research/rl-for-video-generation/credit-assignment.md)
+- [CoCA](../papers/related-methods/step-level-reward-for-free.md)
+- [视频生成中的多层级信用分配](../research/video-generation-credit-assignment.md)

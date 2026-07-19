@@ -73,4 +73,4 @@ VAE decoder
 
 - [源码深读](code-walkthrough.md)
 - [Action conditioning 专题](../../topics/action-conditioning.md)
-- [Action controllability 评估设计](../../research/action-controllability/evaluation-design.md)
+- [Action controllability 评估设计](../../research/action-controllability-evaluation.md)

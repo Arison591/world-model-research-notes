@@ -65,6 +65,6 @@ UCA 直接均匀分配终局奖励；TDPO 引入 critic/baseline；CoCA 用 late
 
 ## 关联笔记
 
-- [CoCA](../papers/generative-model-rl/coca/step-level-reward-for-free.md)
+- [CoCA](../papers/related-methods/step-level-reward-for-free.md)
 - [时序信用分配](temporal-credit-assignment.md)
-- [视频生成中的多层级信用分配](../research/rl-for-video-generation/credit-assignment.md)
+- [视频生成中的多层级信用分配](../research/video-generation-credit-assignment.md)

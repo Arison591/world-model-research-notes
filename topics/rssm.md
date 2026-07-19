@@ -69,5 +69,5 @@ V2 的经验结果支持 categorical latent 在 Atari 上更有效，但不能�
 - [DreamerV1](../papers/model-based-rl/dreamer/dreamer-v1.md)
 - [DreamerV2](../papers/model-based-rl/dreamer/dreamer-v2.md)
 - [DreamerV3](../papers/model-based-rl/dreamer/dreamer-v3.md)
-- [Dreamer 系列比较](../comparisons/dreamer-v1-v2-v3.md)
+- [Dreamer 系列比较](../series/dreamer-series.md)
 - [Latent imagination](latent-imagination.md)

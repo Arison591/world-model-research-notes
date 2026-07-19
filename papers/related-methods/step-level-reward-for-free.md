@@ -9,19 +9,20 @@ authors:
   - Yu Cheng
 year: 2025
 venue: null
-arxiv_id: "2505.19196"
 paper_url: "https://arxiv.org/abs/2505.19196"
 code_url: null
 project_url: null
-category: generative-model-rl
-tags:
-  task: [image-generation]
-  method: [diffusion, reinforcement-learning, return-decomposition]
-  problem: [credit-assignment, evaluation]
+source_urls: []
+
+category: related-methods
+series: null
+tags: [image-generation, diffusion, reinforcement-learning, return-decomposition, credit-assignment, evaluation]
+
 status: revisit
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "用相邻去噪状态对最终图像的相似度变化，为 diffusion trajectory 分配逐步训练权重。"
 ---
 
@@ -47,7 +48,7 @@ CoCA 针对 RL 微调扩散模型时“所有去噪步骤共享同一个终局�
 
 DDPO 把去噪过程视为一个 MDP，中间 reward 通常为零，最终图像获得一次奖励。现有策略梯度随后用同一个终局信号更新所有 denoising timestep，但早期步骤更影响全局结构，后期步骤更偏向纹理和细节，均匀更新可能造成错误的信用分配。
 
-![终局奖励均匀分配与逐步分配的差别](../../../assets/papers/coca/uniform-vs-step-level-reward.png)
+![终局奖励均匀分配与逐步分配的差别](../../assets/papers/coca/uniform-vs-step-level-reward.png)
 
 *来源：原论文的问题示意图。*
 
@@ -55,17 +56,17 @@ DDPO 把去噪过程视为一个 MDP，中间 reward 通常为零，最终图像
 
 论文计算每个中间 latent 与最终去噪结果的余弦相似度，并使用相邻状态之间的相似度增量作为该区间的贡献信号：
 
-![latent 与最终结果的余弦相似度定义](../../../assets/papers/coca/latent-cosine-similarity.png)
+![latent 与最终结果的余弦相似度定义](../../assets/papers/coca/latent-cosine-similarity.png)
 
 *来源：原论文方法公式。*
 
 为降低单步噪声，轨迹被划分为长度为 $W$ 的不重叠窗口，先聚合窗口内的相似度，再计算窗口之间的变化。
 
-![窗口归一化公式](../../../assets/papers/coca/window-normalization.png)
+![窗口归一化公式](../../assets/papers/coca/window-normalization.png)
 
-![窗口级相似度增量](../../../assets/papers/coca/window-delta-similarity.png)
+![窗口级相似度增量](../../assets/papers/coca/window-delta-similarity.png)
 
-![滑动窗口方法示意](../../../assets/papers/coca/sliding-window-illustration.png)
+![滑动窗口方法示意](../../assets/papers/coca/sliding-window-illustration.png)
 
 *以上公式和示意均来自原论文；同一窗口中的 timestep 共享窗口权重。*
 
@@ -73,7 +74,7 @@ DDPO 把去噪过程视为一个 MDP，中间 reward 通常为零，最终图像
 
 相似度变化被用于重加权每个 timestep 的训练信号：
 
-![CoCA 的逐步奖励定义](../../../assets/papers/coca/redistributed-reward.png)
+![CoCA 的逐步奖励定义](../../assets/papers/coca/redistributed-reward.png)
 
 第一阶段在同一 prompt 的多条轨迹之间标准化最终奖励，形式类似 group-relative advantage：
 
@@ -83,15 +84,15 @@ $$
 
 第二阶段再汇总同一 prompt 下各轨迹的逐步统计量，对 timestep reward 做归一化。
 
-![轨迹内部的逐步统计量](../../../assets/papers/coca/trajectory-statistics.png)
+![轨迹内部的逐步统计量](../../assets/papers/coca/trajectory-statistics.png)
 
-![逐步奖励归一化](../../../assets/papers/coca/timestep-reward-normalization.png)
+![逐步奖励归一化](../../assets/papers/coca/timestep-reward-normalization.png)
 
 ### 实验结果
 
 论文在 Stable Diffusion v1.5 与 LoRA 上比较 DDPO、UCA、TDPO 和 CoCA，使用 Aesthetic Score、PickScore、ImageReward、HPSv2 四类奖励。前三类实验用 45 种动物 prompt 训练、8 种未见动物测试；HPSv2 使用更大的 prompt 集。
 
-![CoCA 与基线的实验结果](../../../assets/papers/coca/benchmark-results.png)
+![CoCA 与基线的实验结果](../../assets/papers/coca/benchmark-results.png)
 
 *来源：原论文主结果。论文报告的主要优势是达到相近 reward 时减少 reward query，约对应 1.25×–2× sample efficiency，而不是所有指标都出现大幅绝对提升。*
 
@@ -107,19 +108,19 @@ CoCA 的优点是简单：它不调用额外模型，也不需要训练 timestep
 
 论文给出的定义如下：
 
-![论文中的窗口奖励定义](../../../assets/papers/coca/paper-reward-definition.png)
+![论文中的窗口奖励定义](../../assets/papers/coca/paper-reward-definition.png)
 
 若每个窗口长度为 $W$，且窗口内每个 timestep 使用相同权重，按当前写法汇总后会额外乘上窗口长度：
 
-![按论文写法推导出的窗口总量](../../../assets/papers/coca/derived-window-total.png)
+![按论文写法推导出的窗口总量](../../assets/papers/coca/derived-window-total.png)
 
 通常所说的 reward redistribution 更希望满足总量保持：
 
-![奖励总量保持的目标形式](../../../assets/papers/coca/reward-preserving-target.png)
+![奖励总量保持的目标形式](../../assets/papers/coca/reward-preserving-target.png)
 
 若要严格保持总量，窗口权重可能需要额外除以 $W$：
 
-![保持窗口奖励总量的一种修正](../../../assets/papers/coca/corrected-window-weight.png)
+![保持窗口奖励总量的一种修正](../../assets/papers/coca/corrected-window-weight.png)
 
 这项疑问需要对照作者实现或后续版本再确认，因此笔记状态标记为 `revisit`。
 
@@ -129,6 +130,6 @@ CoCA 的优点是简单：它不调用额外模型，也不需要训练 timestep
 
 ## 关联笔记
 
-- [Diffusion 模型中的强化学习](../../../topics/rl-for-diffusion-models.md)
-- [时序信用分配专题](../../../topics/temporal-credit-assignment.md)
-- [视频生成中的多层级信用分配](../../../research/rl-for-video-generation/credit-assignment.md)
+- [Diffusion 模型中的强化学习](../../topics/rl-for-diffusion-models.md)
+- [时序信用分配专题](../../topics/temporal-credit-assignment.md)
+- [视频生成中的多层级信用分配](../../research/video-generation-credit-assignment.md)

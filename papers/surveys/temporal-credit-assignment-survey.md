@@ -12,19 +12,21 @@ authors:
   - Laura Toni
 year: 2023
 venue: null
-arxiv_id: "2312.01072"
 paper_url: "https://arxiv.org/abs/2312.01072"
 code_url: null
 project_url: null
-category: surveys-and-benchmarks
-tags:
-  task: [model-based-rl]
-  method: [reinforcement-learning, return-decomposition]
-  problem: [credit-assignment, long-horizon]
+source_urls:
+  - "https://uniquestudio.feishu.cn/wiki/VGqdwD1fNi6zI3kqAXScrrAWnmb"
+
+category: surveys
+series: null
+tags: [survey, reinforcement-learning, return-decomposition, credit-assignment, long-horizon]
+
 status: finished
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "用深度、密度和广度刻画时序信用分配，并统一比较时间邻近与回报分解方法。"
 ---
 
@@ -308,4 +310,4 @@ Synthetic Returns 假设终止奖励主要由一个早期关键事件造成。
 
 - [时序信用分配专题](../../topics/temporal-credit-assignment.md)
 - [强化学习基础](../../topics/reinforcement-learning-foundations.md)
-- [视频生成中的信用分配研究问题](../../research/rl-for-video-generation/credit-assignment.md)
+- [视频生成中的信用分配研究问题](../../research/video-generation-credit-assignment.md)
