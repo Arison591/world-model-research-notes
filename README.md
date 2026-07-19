@@ -1,89 +1,93 @@
 # World Model Research Notes
 
-这是一个面向公开研究积累的中文知识库，记录 world model、model-based reinforcement learning、interactive generation、embodied world model，以及生成模型中的强化学习与信用分配。
+一个记录 World Model 领域论文阅读、系列演化、核心知识、代码复现与研究思考的中文仓库。目前重点关注生成式 world model、action-conditioned world model、embodied world model 和 world model evaluation。
 
-仓库不把论文笔记当成彼此孤立的摘要，而是沿着下面的路径沉淀：
+这里首先保存能够独立阅读的单篇论文笔记；`topics/` 与 `series/` 在确有跨论文价值时进一步串联知识，不会为了目录结构把原笔记拆空。
 
-```text
-单篇论文事实
-  → 专题知识
-  → 横向比较
-  → 研究问题
-  → 可执行实验
-```
+## 阅读路线
 
-## 当前研究重点
-
-1. Action-conditioned world models
-2. Action controllability evaluation
-3. Latent dynamics 与 latent action
-4. 长时、实时的视频与具身世界模型
-5. RL 与生成模型中的多层级信用分配
-
-## 阅读地图
-
-### Model-based RL 基础线
+### 1. Model-based RL 与控制
 
 - [DreamerV1：Latent Imagination](papers/model-based-rl/dreamer/dreamer-v1.md)
 - [DreamerV2：Discrete World Models](papers/model-based-rl/dreamer/dreamer-v2.md)
 - [DreamerV3：Cross-domain Stability](papers/model-based-rl/dreamer/dreamer-v3.md)
-- [Dreamer 三代比较](comparisons/dreamer-v1-v2-v3.md)
-- [RSSM 专题](topics/rssm.md)
-- [Latent Imagination 专题](topics/latent-imagination.md)
+- [Dreamer 三代比较](series/dreamer-series.md)
+- [RSSM](topics/rssm.md)
+- [Latent Imagination](topics/latent-imagination.md)
 
-### Interactive world models
+### 2. 生成式与交互式 World Model
 
-- [Genie：从无动作视频发现 latent action](papers/interactive-world-models/genie/genie-1.md)
-- [LingBot-World 1.0](papers/interactive-world-models/lingbot-world/lingbot-world-v1.md)
-- [LingBot-World 2.0](papers/interactive-world-models/lingbot-world/lingbot-world-v2.md)
-- [Latent Action 专题](topics/latent-action.md)
+- [Genie：从无动作视频发现 latent action](papers/generative-world-models/genie.md)
+- [LingBot-World 1.0](papers/generative-world-models/lingbot-world-v1.md)
+- [LingBot-World 2.0](papers/generative-world-models/lingbot-world-v2.md)
+- [Latent Action](topics/latent-action.md)
+- [Action Conditioning](topics/action-conditioning.md)
 
-### Embodied world models
+### 3. 具身与空间 World Model
 
-- [LingBot-VA 1.0](papers/embodied-world-models/lingbot-va/lingbot-va-v1.md)
-- [LingBot-VA 2.0](papers/embodied-world-models/lingbot-va/lingbot-va-v2.md)
-- [LingBot-Map](papers/embodied-world-models/lingbot-map/lingbot-map.md)
-- [LingBot 系列的三条演化路线](comparisons/lingbot-series.md)
+- [LingBot-VA 1.0](papers/embodied-world-models/lingbot-va-v1.md)
+- [LingBot-VA 2.0](papers/embodied-world-models/lingbot-va-v2.md)
+- [LingBot-Map](papers/spatial-world-models/lingbot-map.md)
+- [LingBot 系列总结](series/lingbot-series.md)
 
-### RL 与信用分配
+### 4. RL、Diffusion 与相关方法
 
 - [强化学习基础](topics/reinforcement-learning-foundations.md)
-- [时序信用分配综述](papers/surveys-and-benchmarks/temporal-credit-assignment-survey.md)
+- [时序信用分配综述](papers/surveys/temporal-credit-assignment-survey.md)
 - [时序信用分配专题](topics/temporal-credit-assignment.md)
 - [Diffusion 模型中的强化学习](topics/rl-for-diffusion-models.md)
-- [CoCA：Step-level Reward](papers/generative-model-rl/coca/step-level-reward-for-free.md)
+- [CoCA：Step-level Reward](papers/related-methods/step-level-reward-for-free.md)
 
-## 从阅读到研究
+## 论文系列
 
-- [Research Idea Backlog](research/idea-backlog.md)
-- [Action Controllability Evaluation](research/action-controllability/evaluation-design.md)
-- [视频生成中的多层级信用分配](research/rl-for-video-generation/credit-assignment.md)
-- [EnerVerse-AC 实现概览](implementations/enerverse-ac/overview.md)
+- [Dreamer V1/V2/V3](series/dreamer-series.md)：RSSM、latent imagination、离散表征与跨任务稳定性的连续演化。
+- [LingBot World / VA / Map](series/lingbot-series.md)：生成式交互、机器人控制和流式三维重建三条互补路线。
+
+完整书目、状态和一句话贡献见自动生成的 [Paper Index](PAPER_INDEX.md)。后续计划阅读 PlaNet、DIAMOND、OASIS、DDPO、TDPO 等工作，详见 [Roadmap](ROADMAP.md)。
+
+## 专题知识
+
+- 动力学与行为学习：[RSSM](topics/rssm.md)、[Latent Imagination](topics/latent-imagination.md)
+- 动作表示与控制：[Latent Action](topics/latent-action.md)、[Action Conditioning](topics/action-conditioning.md)、[Action Controllability](topics/action-controllability.md)
+- 强化学习与生成模型：[RL Foundations](topics/reinforcement-learning-foundations.md)、[Temporal Credit Assignment](topics/temporal-credit-assignment.md)、[RL for Diffusion](topics/rl-for-diffusion-models.md)
+
+专题允许与单篇笔记存在必要重叠：单篇笔记负责完整解释论文，专题负责比较多篇工作的共性、差异和未解决问题。
+
+## 代码阅读与复现
+
+- [EnerVerse-AC 仓库概览](implementations/enerverse-ac/overview.md)
 - [EnerVerse-AC 源码深读](implementations/enerverse-ac/code-walkthrough.md)
 
-## 仓库导航
+实现文档独立记录测试范围、上游仓库与版本边界，不作为论文笔记或复现成功声明。
 
-- [论文索引](PAPER_INDEX.md)：由论文 YAML 元数据自动生成。
-- [阅读与研究路线图](ROADMAP.md)：记录下一批论文和知识缺口。
-- [维护规范](CONTRIBUTING.md)：新增笔记、图片和标签前请先阅读。
-- `papers/`：一篇论文一个事实单元。
-- `topics/`：跨论文沉淀知识。
-- `comparisons/`：版本与方法关系。
-- `research/`：可继续验证的问题与实验设计。
-- `implementations/`：外部代码仓库的复现和源码阅读。
+## 当前研究思考
 
-## 阅读状态
+- [想法池](research/ideas.md)
+- [Action Controllability Evaluation](research/action-controllability-evaluation.md)
+- [视频生成中的多层级信用分配](research/video-generation-credit-assignment.md)
 
-| 状态 | 含义 |
-|---|---|
-| `todo` | 尚未开始 |
-| `reading` | 正在阅读 |
-| `skimmed` | 已掌握摘要、方法和主要结果 |
-| `finished` | 关键方法、公式和实验已整理 |
-| `revisit` | 已读，但仍有重要问题待核对 |
-| `implemented` | 已运行代码或完成相关实验 |
+Action controllability 是当前重点研究问题之一，但不是仓库唯一的组织轴。研究文档可以在同一文件中包含问题、假设、方法、指标和实验计划，只有想法足够具体后才独立成文。
 
-## 本地维护
+## 仓库结构
+
+```text
+papers/           单篇论文笔记，按少量稳定类别组织
+series/           论文系列演化与横向比较
+topics/           跨论文长期专题
+research/         想法、研究问题和实验设计
+implementations/  外部代码仓库阅读与复现记录
+assets/           与正文对应的图片、矢量文件和视频
+templates/        论文、系列、专题和实现模板
+config/           分类与标签词表
+scripts/          索引生成与仓库校验
+tests/            维护脚本测试
+```
+
+仓库不按飞书、Notion 或本地 Markdown 等来源分类。原始资料链接直接记录在对应文档的 `source_urls` 中。
+
+## 新增与维护
+
+新增论文时从 [论文模板](templates/paper-note.md) 开始，优先保证笔记自身完整；只有形成跨多篇论文的长期认识时，再更新专题或系列文档。详细规则见 [Contributing](CONTRIBUTING.md)。
 
 ```powershell
 python -m pip install -r requirements-dev.txt

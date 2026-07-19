@@ -9,19 +9,20 @@ authors:
   - Mohammad Norouzi
 year: 2019
 venue: "ICLR 2020"
-arxiv_id: "1912.01603"
 paper_url: "https://arxiv.org/abs/1912.01603"
 code_url: null
 project_url: "https://danijar.com/dreamer/"
+source_urls: []
+
 category: model-based-rl
-tags:
-  task: [model-based-rl]
-  method: [rssm, actor-critic]
-  problem: [long-horizon, compounding-error]
+series: dreamer
+tags: [world-model, model-based-rl, rssm, actor-critic, latent-imagination, long-horizon, compounding-error]
+
 status: finished
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "在学习到的 latent dynamics 中展开想象轨迹，并直接训练 actor 与 critic。"
 ---
 
@@ -429,6 +430,6 @@ DreamerV1 是一篇把 world model 真正变成高效 policy-training environmen
 
 ## 关联笔记
 
-- [Dreamer V1/V2/V3 演化比较](../../../comparisons/dreamer-v1-v2-v3.md)
+- [Dreamer V1/V2/V3 演化比较](../../../series/dreamer-series.md)
 - [RSSM 专题](../../../topics/rssm.md)
 - [Latent imagination 专题](../../../topics/latent-imagination.md)

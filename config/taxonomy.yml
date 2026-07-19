@@ -1,9 +1,10 @@
 categories:
   - model-based-rl
-  - interactive-world-models
+  - generative-world-models
   - embodied-world-models
-  - generative-model-rl
-  - surveys-and-benchmarks
+  - spatial-world-models
+  - surveys
+  - related-methods
 
 paper_statuses:
   - todo
@@ -28,31 +29,36 @@ confidence_levels:
   - high
 
 tags:
-  task:
-    - model-based-rl
-    - interactive-environment
-    - video-generation
-    - image-generation
-    - robotics
-    - embodied-ai
-    - three-d-reconstruction
-  method:
-    - rssm
-    - actor-critic
-    - discrete-latent
-    - transformer
-    - diffusion
-    - latent-action
-    - tokenizer
-    - inverse-dynamics
-    - reinforcement-learning
-    - return-decomposition
-    - streaming-inference
-  problem:
-    - long-horizon
-    - controllability
-    - credit-assignment
-    - generalization
-    - compounding-error
-    - evaluation
-    - real-time
+  - world-model
+  - model-based-rl
+  - generative-world-model
+  - action-conditioned-world-model
+  - embodied-world-model
+  - spatial-world-model
+  - interactive-environment
+  - video-generation
+  - video-prediction
+  - image-generation
+  - robotics
+  - embodied-ai
+  - three-d-reconstruction
+  - rssm
+  - actor-critic
+  - latent-imagination
+  - discrete-latent
+  - transformer
+  - diffusion
+  - latent-action
+  - tokenizer
+  - inverse-dynamics
+  - reinforcement-learning
+  - return-decomposition
+  - streaming-inference
+  - long-horizon
+  - controllability
+  - credit-assignment
+  - generalization
+  - compounding-error
+  - evaluation
+  - real-time
+  - survey

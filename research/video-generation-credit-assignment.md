@@ -57,6 +57,6 @@ $$
 
 ## 关联笔记
 
-- [CoCA](../../papers/generative-model-rl/coca/step-level-reward-for-free.md)
-- [时序信用分配专题](../../topics/temporal-credit-assignment.md)
-- [Diffusion 模型中的强化学习](../../topics/rl-for-diffusion-models.md)
+- [CoCA](../papers/related-methods/step-level-reward-for-free.md)
+- [时序信用分配专题](../topics/temporal-credit-assignment.md)
+- [Diffusion 模型中的强化学习](../topics/rl-for-diffusion-models.md)

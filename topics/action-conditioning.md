@@ -49,4 +49,4 @@ updated: 2026-07-19
 - [Latent action](latent-action.md)
 - [Action controllability](action-controllability.md)
 - [EnerVerse-AC 实现概览](../implementations/enerverse-ac/overview.md)
-- [LingBot 系列比较](../comparisons/lingbot-series.md)
+- [LingBot 系列比较](../series/lingbot-series.md)

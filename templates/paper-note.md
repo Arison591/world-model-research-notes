@@ -1,24 +1,26 @@
 ---
 type: paper
-title: "{{ paper title }}"
-short_name: "{{ short name }}"
+title: ""
+short_name: ""
 authors: []
 year: null
 venue: null
-arxiv_id: null
-paper_url: "{{ URL }}"
+
+paper_url: ""
 code_url: null
 project_url: null
-category: "{{ category from config/taxonomy.yml }}"
-tags:
-  task: []
-  method: []
-  problem: []
+source_urls: []
+
+category: ""
+series: null
+tags: []
+
 status: reading
-read_date: null
-updated: "{{ YYYY-MM-DD }}"
 confidence: low
-main_idea: "{{ one sentence }}"
+read_date: null
+updated: null
+
+main_idea: ""
 ---
 
 # {{ Short name }}：{{ Paper title }}

@@ -53,5 +53,5 @@ $$
 ## 关联笔记
 
 - [RSSM](rssm.md)
-- [Dreamer 系列比较](../comparisons/dreamer-v1-v2-v3.md)
+- [Dreamer 系列比较](../series/dreamer-series.md)
 - [强化学习基础](reinforcement-learning-foundations.md)

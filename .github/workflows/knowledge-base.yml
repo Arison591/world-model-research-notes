@@ -16,6 +16,7 @@ jobs:
         with:
           python-version: "3.9"
           cache: pip
+          cache-dependency-path: requirements-dev.txt
 
       - name: Install maintenance dependencies
         run: python -m pip install -r requirements-dev.txt

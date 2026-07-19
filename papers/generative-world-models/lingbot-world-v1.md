@@ -29,19 +29,21 @@ authors:
   - Hao Ouyang
 year: 2026
 venue: null
-arxiv_id: "2601.20540"
 paper_url: "https://arxiv.org/abs/2601.20540"
 code_url: "https://github.com/robbyant/lingbot-world"
 project_url: "https://technology.robbyant.com/lingbot-world"
-category: interactive-world-models
-tags:
-  task: [interactive-environment, video-generation]
-  method: [diffusion, transformer, streaming-inference]
-  problem: [long-horizon, controllability, real-time]
+source_urls:
+  - "https://my.feishu.cn/wiki/OodjwrEoli5U2dkFXAOc6HNOnDr"
+
+category: generative-world-models
+series: lingbot
+tags: [world-model, generative-world-model, action-conditioned-world-model, interactive-environment, video-generation, diffusion, transformer, streaming-inference, long-horizon, controllability, real-time]
+
 status: finished
+confidence: medium
 read_date: 2026-07-17
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "把开放域视频生成器通过长视频训练、动作适配、因果改造和蒸馏变成实时可控世界模型。"
 ---
 
@@ -65,17 +67,17 @@ main_idea: "把开放域视频生成器通过长视频训练、动作适配、�
 2. 从 5 秒逐步扩展到 60 秒，同时注入动作控制；
 3. 将双向模型改成 block-causal，并蒸馏为少步实时模型。
 
-![LingBot-World 1.0 三阶段训练流水线](../../../assets/papers/lingbot-world-v1/training-pipeline.png)
+![LingBot-World 1.0 三阶段训练流水线](../../assets/papers/lingbot-world-v1/training-pipeline.png)
 
-*来源：原论文 Figure 4。[矢量原图](../../../assets/papers/lingbot-world-v1/source/training-pipeline.pdf)*
+*来源：原论文 Figure 4。[矢量原图](../../assets/papers/lingbot-world-v1/source/training-pipeline.pdf)*
 
 ### 动作条件与长时 rollout
 
 连续相机运动编码为 Plücker embedding，WASD 等离散动作编码为 multi-hot，再通过 AdaLN 调制 DiT。作者冻结主干，仅训练动作 adapter 与相关调制参数，以降低少量动作数据破坏开放域画质的风险。
 
-![动作注入与生成框架](../../../assets/papers/lingbot-world-v1/action-conditioning-pipeline.png)
+![动作注入与生成框架](../../assets/papers/lingbot-world-v1/action-conditioning-pipeline.png)
 
-*来源：原论文 Figure 5。[矢量原图](../../../assets/papers/lingbot-world-v1/source/action-conditioning-pipeline.pdf)*
+*来源：原论文 Figure 5。[矢量原图](../../assets/papers/lingbot-world-v1/source/action-conditioning-pipeline.pdf)*
 
 为减轻 teacher forcing 与推理分布不一致，学生模型在自己生成的历史上继续 rollout，并以截断反向传播、DMD 和对抗训练控制漂移与细节质量。
 
@@ -85,9 +87,9 @@ main_idea: "把开放域视频生成器通过长视频训练、动作适配、�
 - 作者展示最长约 10 分钟的连续生成，并测试离开视野约 60 秒后的地标与物体状态延续。
 - 在作者构建的长视频 VBench 测试上，dynamic degree 报告为 0.8857。
 
-![长期记忆案例](../../../assets/papers/lingbot-world-v1/long-term-memory.png)
+![长期记忆案例](../../assets/papers/lingbot-world-v1/long-term-memory.png)
 
-*来源：原论文 Figure 12。[矢量原图](../../../assets/papers/lingbot-world-v1/source/long-term-memory.pdf)*
+*来源：原论文 Figure 12。[矢量原图](../../assets/papers/lingbot-world-v1/source/long-term-memory.pdf)*
 
 ## 我的理解
 
@@ -103,7 +105,7 @@ main_idea: "把开放域视频生成器通过长视频训练、动作适配、�
 
 ## 关联笔记
 
-- [LingBot 系列演化](../../../comparisons/lingbot-series.md)
-- [Action conditioning 专题](../../../topics/action-conditioning.md)
-- [Action controllability 专题](../../../topics/action-controllability.md)
-- [反事实动作评估设计](../../../research/action-controllability/evaluation-design.md)
+- [LingBot 系列演化](../../series/lingbot-series.md)
+- [Action conditioning 专题](../../topics/action-conditioning.md)
+- [Action controllability 专题](../../topics/action-controllability.md)
+- [反事实动作评估设计](../../research/action-controllability-evaluation.md)

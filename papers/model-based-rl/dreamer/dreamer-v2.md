@@ -9,19 +9,20 @@ authors:
   - Jimmy Ba
 year: 2020
 venue: "ICLR 2021"
-arxiv_id: "2010.02193"
 paper_url: "https://arxiv.org/abs/2010.02193"
 code_url: null
 project_url: "https://danijar.com/dreamerv2/"
+source_urls: []
+
 category: model-based-rl
-tags:
-  task: [model-based-rl]
-  method: [rssm, actor-critic, discrete-latent]
-  problem: [generalization, compounding-error]
+series: dreamer
+tags: [world-model, model-based-rl, rssm, actor-critic, latent-imagination, discrete-latent, generalization, compounding-error]
+
 status: finished
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "用 categorical latent、KL balancing 与混合梯度估计把 Dreamer 推进到 Atari。"
 ---
 
@@ -381,6 +382,6 @@ DreamerV2 是一篇靠表示形式、KL 优化和 actor gradient 设计把 Dream
 
 ## 关联笔记
 
-- [Dreamer V1/V2/V3 演化比较](../../../comparisons/dreamer-v1-v2-v3.md)
+- [Dreamer V1/V2/V3 演化比较](../../../series/dreamer-series.md)
 - [RSSM 专题](../../../topics/rssm.md)
 - [Latent imagination 专题](../../../topics/latent-imagination.md)

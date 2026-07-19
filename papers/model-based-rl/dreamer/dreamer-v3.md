@@ -9,19 +9,20 @@ authors:
   - Timothy Lillicrap
 year: 2023
 venue: null
-arxiv_id: "2301.04104"
 paper_url: "https://arxiv.org/abs/2301.04104"
 code_url: "https://github.com/danijar/dreamerv3"
 project_url: "https://danijar.com/dreamerv3/"
+source_urls: []
+
 category: model-based-rl
-tags:
-  task: [model-based-rl]
-  method: [rssm, actor-critic, discrete-latent]
-  problem: [generalization, long-horizon]
+series: dreamer
+tags: [world-model, model-based-rl, rssm, actor-critic, latent-imagination, discrete-latent, generalization, long-horizon]
+
 status: finished
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "以 symlog、twohot、free bits 和 return normalization 统一跨领域训练尺度。"
 ---
 
@@ -528,6 +529,6 @@ DreamerV3 是 Dreamer 系列从“有效算法”走向“可跨域使用的算�
 
 ## 关联笔记
 
-- [Dreamer V1/V2/V3 演化比较](../../../comparisons/dreamer-v1-v2-v3.md)
+- [Dreamer V1/V2/V3 演化比较](../../../series/dreamer-series.md)
 - [RSSM 专题](../../../topics/rssm.md)
 - [Latent imagination 专题](../../../topics/latent-imagination.md)

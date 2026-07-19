@@ -15,7 +15,7 @@ updated: 2026-07-19
 - **来源：**Genie、LingBot-World、LingBot-VA、EnerVerse-AC
 - **问题：**固定初始状态和随机性后，改变 action 是否稳定、方向正确地改变未来？
 - **下一步：**执行 original / zero / reversed / scaled / shuffled action 干预。
-- **详细设计：**[Action Controllability Evaluation](action-controllability/evaluation-design.md)
+- **详细设计：**[Action Controllability Evaluation](action-controllability-evaluation.md)
 
 ## IDEA-002：视频生成中的多层级信用分配
 
@@ -23,7 +23,7 @@ updated: 2026-07-19
 - **来源：**CoCA、DDPO、时序信用分配综述
 - **问题：**终局视频 reward 应如何分配到 diffusion timestep、视频帧、空间区域和动作片段？
 - **下一步：**先验证相邻帧 reward correlation 与关键 denoising stage。
-- **详细设计：**[Credit Assignment for Video Generation](rl-for-video-generation/credit-assignment.md)
+- **详细设计：**[Credit Assignment for Video Generation](video-generation-credit-assignment.md)
 
 ## IDEA-003：无动作视频预训练与少量真实动作 grounding
 

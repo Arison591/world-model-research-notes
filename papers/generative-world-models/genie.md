@@ -30,19 +30,20 @@ authors:
   - Tim Rocktäschel
 year: 2024
 venue: null
-arxiv_id: "2402.15391"
 paper_url: "https://arxiv.org/abs/2402.15391"
 code_url: null
 project_url: "https://sites.google.com/view/genie-2024/"
-category: interactive-world-models
-tags:
-  task: [interactive-environment, video-generation]
-  method: [transformer, latent-action, tokenizer]
-  problem: [controllability, generalization]
+source_urls: []
+
+category: generative-world-models
+series: null
+tags: [world-model, generative-world-model, action-conditioned-world-model, interactive-environment, video-generation, transformer, latent-action, tokenizer, controllability, generalization]
+
 status: finished
+confidence: medium
 read_date: null
 updated: 2026-07-19
-confidence: medium
+
 main_idea: "从无动作标签视频中学习离散 latent action，并据此逐帧生成可交互环境。"
 ---
 
@@ -60,7 +61,7 @@ Genie 想做的事情很直接：**只看没有动作标注的互联网视频，
 
 Genie 的处理方式是先从相邻视频帧中自动推断一个离散的 **latent action**，再用这个 latent action 条件化下一帧生成。训练结束后，用户可以像使用一个只有 8 个按键的手柄一样选择 latent action，模型据此继续生成下一帧。
 
-![Genie 可以从生成图、手绘草图和真实照片出发，生成可交互轨迹](../../../assets/papers/genie-1/interactive-generation-examples.png)
+![Genie 可以从生成图、手绘草图和真实照片出发，生成可交互轨迹](../../assets/papers/genie-1/interactive-generation-examples.png)
 
 > 图源：原论文 Figure 1。不同输入图像经过 Genie 后，可以用离散 latent action 逐帧推进。
 
@@ -105,7 +106,7 @@ Genie 由三个主要部分组成：
 2. **Latent Action Model（LAM）**：从前后帧中推断离散 latent action；
 3. **Dynamics Model**：根据历史视频 token 和 latent action 生成下一帧 token。
 
-![Genie 的整体训练流程](../../../assets/papers/genie-1/architecture.png)
+![Genie 的整体训练流程](../../assets/papers/genie-1/architecture.png)
 
 > 图源：原论文 Figure 3。图中还包含 ST-Transformer、LAM 与 tokenizer 的结构示意。
 
@@ -230,7 +231,7 @@ Dynamics Model 使用 256 TPUv5p、batch size 512、训练 125k steps，总计�
 
 作者训练了 41M 到 2.7B 的多种 Dynamics Model。模型规模和 batch size 增大时，最终训练 loss 都继续下降，没有明显饱和。
 
-![Genie 的模型规模和 batch size scaling](../../../assets/papers/genie-1/scaling-results.png)
+![Genie 的模型规模和 batch size scaling](../../assets/papers/genie-1/scaling-results.png)
 
 > 图源：原论文 Figure 9。这里证明的是生成建模 loss 的 scaling，并不等价于交互能力按相同比例提升。
 
@@ -246,7 +247,7 @@ Dynamics Model 使用 256 TPUv5p、batch size 512、训练 125k steps，总计�
 
 连续执行同一个 latent action 后，图中的主体通常会产生游戏化运动。
 
-![不同类型图像作为 Genie 的初始环境](../../../assets/papers/genie-1/out-of-distribution-prompts.png)
+![不同类型图像作为 Genie 的初始环境](../../assets/papers/genie-1/out-of-distribution-prompts.png)
 
 > 图源：原论文 Figure 10。
 
@@ -268,7 +269,7 @@ Dynamics Model 使用 256 TPUv5p、batch size 512、训练 125k steps，总计�
 
 在 easy 和 hard 设置中，使用约 200 条带标签专家样本后，LAM-based policy 的表现接近直接使用真实专家动作训练的 oracle BC。
 
-![使用少量真实动作样本完成 latent-to-real 映射](../../../assets/papers/genie-1/latent-to-real-action-mapping.png)
+![使用少量真实动作样本完成 latent-to-real 映射](../../assets/papers/genie-1/latent-to-real-action-mapping.png)
 
 > 图源：原论文 Figure 15。
 
@@ -352,6 +353,6 @@ Genie 的方法部分很大，但评估仍然以 qualitative results 和较粗�
 
 ## 关联笔记
 
-- [Latent action 专题](../../../topics/latent-action.md)
-- [Action controllability 专题](../../../topics/action-controllability.md)
-- [Action intervention 评估设计](../../../research/action-controllability/evaluation-design.md)
+- [Latent action 专题](../../topics/latent-action.md)
+- [Action controllability 专题](../../topics/action-controllability.md)
+- [Action intervention 评估设计](../../research/action-controllability-evaluation.md)

@@ -1,12 +1,12 @@
 ---
-type: comparison
-title: "{{ comparison title }}"
+type: series
+title: "{{ series title }}"
 papers: []
 status: draft
 updated: "{{ YYYY-MM-DD }}"
 ---
 
-# {{ Comparison title }}
+# {{ Series title }}
 
 ## 一句话结论
 

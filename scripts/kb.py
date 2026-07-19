@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and validate the World Model Research Notes knowledge base."""
+"""Build and validate the World Model Research Notes repository."""
 
 from __future__ import annotations
 
@@ -15,7 +15,18 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONTENT_DIRS = ("papers", "topics", "comparisons", "research", "implementations")
+CONTENT_DIRS = ("papers", "series", "topics", "research", "implementations")
+FORBIDDEN_SOURCE_DIRS = (
+    "feishu",
+    "notion",
+    "imported",
+    "external-notes",
+    "sources",
+    "knowledge",
+    "synthesis",
+    "comparisons",
+    "indexes",
+)
 PAPER_REQUIRED = (
     "type",
     "title",
@@ -23,21 +34,22 @@ PAPER_REQUIRED = (
     "authors",
     "year",
     "venue",
-    "arxiv_id",
     "paper_url",
     "code_url",
     "project_url",
+    "source_urls",
     "category",
+    "series",
     "tags",
     "status",
+    "confidence",
     "read_date",
     "updated",
-    "confidence",
     "main_idea",
 )
 OTHER_REQUIRED = {
+    "series": ("type", "title", "papers", "status", "updated"),
     "topic": ("type", "title", "source_papers", "status", "updated"),
-    "comparison": ("type", "title", "papers", "status", "updated"),
     "research": ("type", "title", "status", "updated"),
     "implementation": (
         "type",
@@ -49,7 +61,6 @@ OTHER_REQUIRED = {
     ),
 }
 KEBAB = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-ARXIV_ID = re.compile(r"^\d{4}\.\d{4,5}$")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
@@ -114,12 +125,21 @@ def strip_fenced_code(text: str) -> str:
     return "\n".join(result)
 
 
-def scalar_date(value: Any) -> bool:
-    return value is not None and bool(DATE.fullmatch(str(value)))
+def is_optional_date(value: Any) -> bool:
+    return value is None or bool(DATE.fullmatch(str(value)))
 
 
-def is_url_or_null(value: Any) -> bool:
-    return value is None or (isinstance(value, str) and value.startswith(("https://", "http://")))
+def is_url_or_empty(value: Any) -> bool:
+    return value is None or value == "" or (
+        isinstance(value, str) and value.startswith(("https://", "http://"))
+    )
+
+
+def validate_source_urls(value: Any, rel: str) -> List[str]:
+    if not isinstance(value, list):
+        return [f"{rel}: source_urls 必须是列表"]
+    invalid = [url for url in value if not is_url_or_empty(url) or url in (None, "")]
+    return [f"{rel}: source_urls 包含非法 URL {invalid}"] if invalid else []
 
 
 def validate_metadata(doc: Document, root: Path, taxonomy: Dict[str, Any]) -> List[str]:
@@ -127,12 +147,9 @@ def validate_metadata(doc: Document, root: Path, taxonomy: Dict[str, Any]) -> Li
     rel = doc.path.relative_to(root).as_posix()
     metadata = doc.metadata
     doc_type = metadata.get("type")
-    if doc_type == "paper":
-        required = PAPER_REQUIRED
-    else:
-        required = OTHER_REQUIRED.get(str(doc_type), ())
-        if not required:
-            return [f"{rel}: 未知或缺失的 type: {doc_type!r}"]
+    required = PAPER_REQUIRED if doc_type == "paper" else OTHER_REQUIRED.get(str(doc_type), ())
+    if not required:
+        return [f"{rel}: 未知或缺失的 type: {doc_type!r}"]
     for key in required:
         if key not in metadata:
             errors.append(f"{rel}: 缺少 metadata 字段 {key}")
@@ -148,38 +165,38 @@ def validate_metadata(doc: Document, root: Path, taxonomy: Dict[str, Any]) -> Li
             errors.append(f"{rel}: 非法论文 status {metadata.get('status')!r}")
         if metadata.get("confidence") not in taxonomy["confidence_levels"]:
             errors.append(f"{rel}: 非法 confidence {metadata.get('confidence')!r}")
-        if not isinstance(metadata.get("authors"), list) or not metadata.get("authors"):
-            errors.append(f"{rel}: authors 必须是非空列表")
-        if not isinstance(metadata.get("year"), int):
-            errors.append(f"{rel}: year 必须是整数")
-        arxiv_id = metadata.get("arxiv_id")
-        if arxiv_id is not None and not ARXIV_ID.fullmatch(str(arxiv_id)):
-            errors.append(f"{rel}: arxiv_id 格式错误 {arxiv_id!r}")
+        if not isinstance(metadata.get("authors"), list):
+            errors.append(f"{rel}: authors 必须是列表")
+        if metadata.get("year") is not None and not isinstance(metadata.get("year"), int):
+            errors.append(f"{rel}: year 必须是整数或 null")
+        if metadata.get("venue") is not None and not isinstance(metadata.get("venue"), str):
+            errors.append(f"{rel}: venue 必须是字符串或 null")
         for field in ("paper_url", "code_url", "project_url"):
-            if not is_url_or_null(metadata.get(field)):
-                errors.append(f"{rel}: {field} 必须是 http(s) URL 或 null")
-        if metadata.get("read_date") is not None and not scalar_date(metadata.get("read_date")):
-            errors.append(f"{rel}: read_date 必须是 YYYY-MM-DD 或 null")
+            if not is_url_or_empty(metadata.get(field)):
+                errors.append(f"{rel}: {field} 必须是 http(s) URL、空字符串或 null")
+        errors.extend(validate_source_urls(metadata.get("source_urls"), rel))
+        series = metadata.get("series")
+        if series is not None and (not isinstance(series, str) or not KEBAB.fullmatch(series)):
+            errors.append(f"{rel}: series 必须是 kebab-case 字符串或 null")
+        tags = metadata.get("tags")
+        if not isinstance(tags, list):
+            errors.append(f"{rel}: tags 必须是扁平列表")
+        else:
+            invalid = sorted(set(tags) - set(taxonomy["tags"]))
+            if invalid:
+                errors.append(f"{rel}: tags 包含未登记标签 {invalid}")
         if not isinstance(metadata.get("main_idea"), str) or not metadata.get("main_idea", "").strip():
             errors.append(f"{rel}: main_idea 不能为空")
-        tags = metadata.get("tags")
-        if not isinstance(tags, dict):
-            errors.append(f"{rel}: tags 必须按 task/method/problem 分组")
-        else:
-            for group in ("task", "method", "problem"):
-                values = tags.get(group)
-                if not isinstance(values, list):
-                    errors.append(f"{rel}: tags.{group} 必须是列表")
-                    continue
-                allowed = set(taxonomy["tags"][group])
-                invalid = sorted(set(values) - allowed)
-                if invalid:
-                    errors.append(f"{rel}: tags.{group} 包含未登记标签 {invalid}")
-    elif metadata.get("status") not in taxonomy["document_statuses"]:
-        errors.append(f"{rel}: 非法文档 status {metadata.get('status')!r}")
-
-    if not scalar_date(metadata.get("updated")):
-        errors.append(f"{rel}: updated 必须是 YYYY-MM-DD")
+        for field in ("read_date", "updated"):
+            if not is_optional_date(metadata.get(field)):
+                errors.append(f"{rel}: {field} 必须是 YYYY-MM-DD 或 null")
+    else:
+        if metadata.get("status") not in taxonomy["document_statuses"]:
+            errors.append(f"{rel}: 非法文档 status {metadata.get('status')!r}")
+        if not is_optional_date(metadata.get("updated")):
+            errors.append(f"{rel}: updated 必须是 YYYY-MM-DD 或 null")
+        if "source_urls" in metadata:
+            errors.extend(validate_source_urls(metadata.get("source_urls"), rel))
     return errors
 
 
@@ -193,6 +210,8 @@ def validate_path(path: Path, root: Path) -> List[str]:
             errors.append(f"{rel.as_posix()}: 目录名不是 kebab-case: {part}")
     if not KEBAB.fullmatch(path.stem):
         errors.append(f"{rel.as_posix()}: 文件名不是 kebab-case")
+    if len(rel.parts) - 1 > 3:
+        errors.append(f"{rel.as_posix()}: 正文目录层级超过三层")
     return errors
 
 
@@ -213,6 +232,10 @@ def validate_repository(root: Path = ROOT) -> List[str]:
     except Exception as exc:  # pragma: no cover - fatal configuration path
         return [f"无法读取 config/taxonomy.yml: {exc}"]
 
+    for name in FORBIDDEN_SOURCE_DIRS:
+        if (root / name).exists():
+            errors.append(f"{name}/: 不应保留来源分类、映射或旧的过度拆分目录")
+
     linked_assets: Set[Path] = set()
     short_names: Dict[str, Path] = {}
     for path in markdown_documents(root):
@@ -228,7 +251,7 @@ def validate_repository(root: Path = ROOT) -> List[str]:
             errors.append(f"{rel}: 应有且仅有一个 H1，当前为 {h1_count}")
         errors.extend(validate_path(path, root))
 
-        if path.parts[len(root.parts)] in CONTENT_DIRS:
+        if path.relative_to(root).parts[0] in CONTENT_DIRS:
             try:
                 doc = read_document(path)
             except (UnicodeDecodeError, ValueError, yaml.YAMLError) as exc:
@@ -238,9 +261,8 @@ def validate_repository(root: Path = ROOT) -> List[str]:
             if doc.metadata.get("type") == "paper":
                 short_name = str(doc.metadata.get("short_name", "")).casefold()
                 if short_name in short_names:
-                    errors.append(
-                        f"{rel}: short_name 与 {short_names[short_name].relative_to(root).as_posix()} 重复"
-                    )
+                    other = short_names[short_name].relative_to(root).as_posix()
+                    errors.append(f"{rel}: short_name 与 {other} 重复")
                 short_names[short_name] = path
 
         for match in LINK.finditer(clean):
@@ -254,14 +276,14 @@ def validate_repository(root: Path = ROOT) -> List[str]:
                 continue
             if not resolved.exists():
                 errors.append(f"{rel}: 断开的相对链接 {match.group(1)!r}")
+                continue
+            try:
+                resolved.relative_to((root / "assets").resolve())
+            except ValueError:
+                pass
             else:
-                try:
-                    resolved.relative_to((root / "assets").resolve())
-                except ValueError:
-                    pass
-                else:
-                    if resolved.is_file() and resolved.suffix.lower() != ".md":
-                        linked_assets.add(resolved)
+                if resolved.is_file() and resolved.suffix.lower() != ".md":
+                    linked_assets.add(resolved)
 
     assets_root = root / "assets"
     if assets_root.exists():
@@ -269,7 +291,8 @@ def validate_repository(root: Path = ROOT) -> List[str]:
             if asset.suffix.lower() == ".md":
                 continue
             if asset not in linked_assets:
-                errors.append(f"{asset.relative_to(root.resolve()).as_posix()}: 孤立资产，未被 Markdown 引用")
+                rel = asset.relative_to(root.resolve()).as_posix()
+                errors.append(f"{rel}: 孤立资产，未被 Markdown 引用")
     return sorted(set(errors))
 
 
@@ -289,10 +312,11 @@ def render_index(root: Path = ROOT) -> str:
 
     category_titles = {
         "model-based-rl": "Model-based Reinforcement Learning",
-        "interactive-world-models": "Interactive World Models",
+        "generative-world-models": "Generative & Interactive World Models",
         "embodied-world-models": "Embodied World Models",
-        "generative-model-rl": "RL for Generative Models",
-        "surveys-and-benchmarks": "Surveys & Benchmarks",
+        "spatial-world-models": "Spatial World Models",
+        "surveys": "Surveys",
+        "related-methods": "Related Methods",
     }
     lines = [
         "# Paper Index",
@@ -305,7 +329,10 @@ def render_index(root: Path = ROOT) -> str:
     for category in taxonomy["categories"]:
         docs = sorted(
             grouped[category],
-            key=lambda doc: (doc.metadata.get("year", 9999), str(doc.metadata.get("short_name", "")).casefold()),
+            key=lambda doc: (
+                doc.metadata.get("year") if isinstance(doc.metadata.get("year"), int) else 9999,
+                str(doc.metadata.get("short_name", "")).casefold(),
+            ),
         )
         if not docs:
             continue
@@ -349,7 +376,8 @@ def build_index(root: Path, check: bool) -> int:
             return 1
         print("PAPER_INDEX.md 已同步。")
         return 0
-    path.write_text(expected, encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(expected)
     print(f"已生成 {path.relative_to(root)}。")
     return 0
 
@@ -359,7 +387,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     subparsers = parser.add_subparsers(dest="command", required=True)
     build = subparsers.add_parser("build-index", help="从论文 metadata 生成 PAPER_INDEX.md")
     build.add_argument("--check", action="store_true", help="只检查索引是否同步")
-    subparsers.add_parser("validate", help="验证 metadata、链接、命名和资产")
+    subparsers.add_parser("validate", help="验证 metadata、链接、命名、层级和资产")
     args = parser.parse_args(argv)
 
     if args.command == "build-index":

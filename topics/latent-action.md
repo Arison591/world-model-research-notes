@@ -49,7 +49,7 @@ IDM 从相邻 semantic visual latent 推断 transition variable，FDM 以 transp
 
 ## 关联笔记
 
-- [Genie](../papers/interactive-world-models/genie/genie-1.md)
-- [LingBot-VA 2.0](../papers/embodied-world-models/lingbot-va/lingbot-va-v2.md)
+- [Genie](../papers/generative-world-models/genie.md)
+- [LingBot-VA 2.0](../papers/embodied-world-models/lingbot-va-v2.md)
 - [Action controllability](action-controllability.md)
-- [反事实动作评估设计](../research/action-controllability/evaluation-design.md)
+- [反事实动作评估设计](../research/action-controllability-evaluation.md)
