@@ -1,0 +1,22 @@
+World Model Research Notes
+Copyright (c) 2026 Arison591
+
+Except for third-party assets described below, the original prose in this
+repository is licensed under the Creative Commons
+Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+You may share and adapt the original prose for non-commercial purposes if
+you provide appropriate attribution, link to the license, and indicate
+whether changes were made.
+
+Full legal terms:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+SPDX-License-Identifier: CC-BY-NC-4.0
+
+This license does not apply to images, tables, vector PDFs, videos, paper
+excerpts, trademarks, or other third-party materials under `assets/`.
+Those materials remain subject to the rights of their original owners.
+
+Code under `scripts/` and `tests/` is licensed separately under the MIT
+License in `LICENSE-CODE`.

@@ -1,0 +1,58 @@
+categories:
+  - model-based-rl
+  - interactive-world-models
+  - embodied-world-models
+  - generative-model-rl
+  - surveys-and-benchmarks
+
+paper_statuses:
+  - todo
+  - reading
+  - skimmed
+  - finished
+  - revisit
+  - implemented
+
+document_statuses:
+  - draft
+  - active
+  - stable
+  - investigating
+  - experiment-ready
+  - parked
+  - implemented
+
+confidence_levels:
+  - low
+  - medium
+  - high
+
+tags:
+  task:
+    - model-based-rl
+    - interactive-environment
+    - video-generation
+    - image-generation
+    - robotics
+    - embodied-ai
+    - three-d-reconstruction
+  method:
+    - rssm
+    - actor-critic
+    - discrete-latent
+    - transformer
+    - diffusion
+    - latent-action
+    - tokenizer
+    - inverse-dynamics
+    - reinforcement-learning
+    - return-decomposition
+    - streaming-inference
+  problem:
+    - long-horizon
+    - controllability
+    - credit-assignment
+    - generalization
+    - compounding-error
+    - evaluation
+    - real-time

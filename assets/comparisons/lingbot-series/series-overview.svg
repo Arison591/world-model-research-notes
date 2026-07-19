@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#172033" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#536174"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2D8C69"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#8B96A8"/>
+    </marker>
+    <style>
+      .zh { font-family: "Noto Sans SC Thin", "Noto Sans SC", sans-serif; }
+      .title { font-size: 42px; font-weight: 760; fill: #172033; }
+      .subtitle { font-size: 20px; fill: #687386; }
+      .lane-title { font-size: 24px; font-weight: 760; }
+      .box-title { font-size: 23px; font-weight: 760; fill: #172033; }
+      .box-copy { font-size: 17px; fill: #566276; }
+      .io-title { font-size: 17px; font-weight: 720; fill: #283548; }
+      .io-copy { font-size: 16px; fill: #687386; }
+      .tag { font-size: 14px; font-weight: 760; letter-spacing: 1.8px; }
+      .note { font-size: 16px; fill: #687386; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#F5F7FA"/>
+  <circle cx="1470" cy="80" r="210" fill="#EAF0FF" opacity="0.7"/>
+  <circle cx="90" cy="920" r="230" fill="#EAF8F2" opacity="0.75"/>
+
+  <g class="zh">
+    <text x="100" y="68" class="tag" fill="#5C6AC4">LINGBOT SERIES MAP · 2026</text>
+    <text x="100" y="124" class="title">五篇论文不是一条直线，而是三条并行路线</text>
+    <text x="100" y="163" class="subtitle">World 生成可交互世界，VA 把未来视觉转成机器人动作，Map 建立显式三维空间记忆。</text>
+
+    <!-- Cross-paper links, placed behind the cards. -->
+    <path d="M1375 312 C1515 410,1515 650,1375 777" fill="none" stroke="#2D8C69" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <rect x="1280" y="585" width="245" height="54" rx="14" fill="#E9F7F1" stroke="#A9DCC8"/>
+    <text x="1402" y="608" text-anchor="middle" class="io-title" fill="#247554">论文已展示</text>
+    <text x="1402" y="630" text-anchor="middle" class="io-copy" fill="#247554">World 视频 → Map 重建</text>
+
+    <path d="M820 795 C680 730,685 610,820 544" fill="none" stroke="#8B96A8" stroke-width="3" stroke-dasharray="10 10" marker-end="url(#arrow-dashed)"/>
+    <path d="M850 795 C620 665,615 405,820 314" fill="none" stroke="#8B96A8" stroke-width="3" stroke-dasharray="10 10" marker-end="url(#arrow-dashed)"/>
+
+    <!-- World lane -->
+    <rect x="74" y="208" width="1452" height="168" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+    <rect x="74" y="208" width="18" height="168" rx="9" fill="#E88A3D"/>
+    <text x="118" y="250" class="lane-title" fill="#C76822">WORLD</text>
+    <text x="118" y="278" class="box-copy">视觉世界生成</text>
+
+    <rect x="252" y="242" width="188" height="102" rx="18" fill="#FFF6ED" stroke="#F3C79E"/>
+    <text x="346" y="271" text-anchor="middle" class="io-title">输入</text>
+    <text x="346" y="299" text-anchor="middle" class="io-copy">初始图像 / 历史视频</text>
+    <text x="346" y="324" text-anchor="middle" class="io-copy">相机动作 / 文字事件</text>
+
+    <line x1="448" y1="293" x2="492" y2="293" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="505" y="232" width="238" height="122" rx="20" fill="#FFF0E2" stroke="#E9A564"/>
+    <text x="624" y="269" text-anchor="middle" class="box-title">World 1.0</text>
+    <text x="624" y="299" text-anchor="middle" class="box-copy">长视频 + 动作控制</text>
+    <text x="624" y="326" text-anchor="middle" class="box-copy">双向教师 → 因果实时模型</text>
+
+    <line x1="752" y1="293" x2="795" y2="293" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <text x="773" y="275" text-anchor="middle" class="tag" fill="#9A6A43">UPGRADE</text>
+    <rect x="808" y="225" width="300" height="136" rx="20" fill="#FFE9D6" stroke="#DE8E42"/>
+    <text x="958" y="262" text-anchor="middle" class="box-title">World 2.0</text>
+    <text x="958" y="292" text-anchor="middle" class="box-copy">原生 causal pretraining + MoBA</text>
+    <text x="958" y="319" text-anchor="middle" class="box-copy">Director–Pilot harness</text>
+    <text x="958" y="344" text-anchor="middle" class="box-copy">长时稳定与实时部署</text>
+
+    <line x1="1117" y1="293" x2="1160" y2="293" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="1173" y="242" width="190" height="102" rx="18" fill="#FFF8F1" stroke="#F3C79E"/>
+    <text x="1268" y="272" text-anchor="middle" class="io-title">输出</text>
+    <text x="1268" y="300" text-anchor="middle" class="io-copy">可持续展开、可控制的</text>
+    <text x="1268" y="325" text-anchor="middle" class="io-copy">未来视频世界</text>
+
+    <!-- VA lane -->
+    <rect x="74" y="410" width="1248" height="168" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+    <rect x="74" y="410" width="18" height="168" rx="9" fill="#5A78D1"/>
+    <text x="118" y="452" class="lane-title" fill="#4864B5">VA</text>
+    <text x="118" y="480" class="box-copy">机器人控制</text>
+
+    <rect x="252" y="444" width="188" height="102" rx="18" fill="#F1F4FF" stroke="#B8C5EB"/>
+    <text x="346" y="473" text-anchor="middle" class="io-title">输入</text>
+    <text x="346" y="501" text-anchor="middle" class="io-copy">机器人观察 + 指令</text>
+    <text x="346" y="526" text-anchor="middle" class="io-copy">历史动作 / 演示视频</text>
+
+    <line x1="448" y1="495" x2="492" y2="495" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="505" y="434" width="238" height="122" rx="20" fill="#EAF0FF" stroke="#91A7E0"/>
+    <text x="624" y="471" text-anchor="middle" class="box-title">VA 1.0</text>
+    <text x="624" y="501" text-anchor="middle" class="box-copy">预测未来视觉状态</text>
+    <text x="624" y="528" text-anchor="middle" class="box-copy">再用 inverse dynamics 解动作</text>
+
+    <line x1="752" y1="495" x2="795" y2="495" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <text x="773" y="477" text-anchor="middle" class="tag" fill="#6777B8">UPGRADE</text>
+    <rect x="808" y="427" width="300" height="136" rx="20" fill="#DFE7FF" stroke="#6C87D3"/>
+    <text x="958" y="464" text-anchor="middle" class="box-title">VA 2.0</text>
+    <text x="958" y="494" text-anchor="middle" class="box-copy">语义 visual-action tokenizer</text>
+    <text x="958" y="521" text-anchor="middle" class="box-copy">native causal pretraining + MCP</text>
+    <text x="958" y="546" text-anchor="middle" class="box-copy">MoE / ICL / Foresight</text>
+
+    <line x1="1117" y1="495" x2="1160" y2="495" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="1173" y="444" width="190" height="102" rx="18" fill="#F4F6FF" stroke="#B8C5EB"/>
+    <text x="1268" y="474" text-anchor="middle" class="io-title">输出</text>
+    <text x="1268" y="502" text-anchor="middle" class="io-copy">未来视觉 latent</text>
+    <text x="1268" y="527" text-anchor="middle" class="io-copy">+ 机器人 action chunk</text>
+
+    <!-- Map lane -->
+    <rect x="74" y="646" width="1452" height="184" rx="28" fill="#FFFFFF" filter="url(#shadow)"/>
+    <rect x="74" y="646" width="18" height="184" rx="9" fill="#35A77C"/>
+    <text x="118" y="690" class="lane-title" fill="#248260">MAP</text>
+    <text x="118" y="718" class="box-copy">三维空间记忆</text>
+
+    <rect x="252" y="687" width="188" height="102" rx="18" fill="#EDF9F4" stroke="#9AD3BD"/>
+    <text x="346" y="716" text-anchor="middle" class="io-title">输入</text>
+    <text x="346" y="744" text-anchor="middle" class="io-copy">连续 RGB 视频流</text>
+    <text x="346" y="769" text-anchor="middle" class="io-copy">只使用已经到达的帧</text>
+
+    <line x1="448" y1="738" x2="512" y2="738" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="525" y="673" width="570" height="130" rx="20" fill="#DFF5EC" stroke="#58B491"/>
+    <text x="810" y="709" text-anchor="middle" class="box-title">LingBot-Map</text>
+    <text x="810" y="739" text-anchor="middle" class="box-copy">Anchor：固定坐标与尺度　·　Local Window：近期密集几何</text>
+    <text x="810" y="768" text-anchor="middle" class="box-copy">Trajectory Memory：压缩长期轨迹　·　GCA：流式聚合三类上下文</text>
+
+    <line x1="1104" y1="738" x2="1160" y2="738" stroke="#536174" stroke-width="3" marker-end="url(#arrow-dark)"/>
+    <rect x="1173" y="687" width="190" height="102" rx="18" fill="#F1FBF7" stroke="#9AD3BD"/>
+    <text x="1268" y="716" text-anchor="middle" class="io-title">输出</text>
+    <text x="1268" y="744" text-anchor="middle" class="io-copy">相机位姿 + 深度</text>
+    <text x="1268" y="769" text-anchor="middle" class="io-copy">+ 点云</text>
+
+    <!-- Legend and scope warning -->
+    <line x1="116" y1="890" x2="176" y2="890" stroke="#2D8C69" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <text x="194" y="896" class="note">实线：论文已经展示的跨分支使用</text>
+    <line x1="610" y1="890" x2="670" y2="890" stroke="#8B96A8" stroke-width="3" stroke-dasharray="9 8" marker-end="url(#arrow-dashed)"/>
+    <text x="688" y="896" class="note">虚线：可能的未来结合；这五篇论文尚未把 Map 真正接入 World / VA</text>
+    <rect x="100" y="927" width="1400" height="1" fill="#DDE3EC"/>
+    <text x="100" y="962" class="note">关键区别：World 的 action 是玩家控制与事件；VA 的 action 是机器人低层控制；Map 不负责决策，只估计空间状态。</text>
+  </g>
+</svg>
